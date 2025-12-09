@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Syncanvas - Collaborative Whiteboard</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Handwritten fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Caveat:wght@400;600&display=swap" rel="stylesheet" />
+
+    <style>
+      body {
+        font-family: "Caveat", "Gloria Hallelujah", sans-serif;
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .bg-board {
+        background-image: url('./background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    </style>
+  </head>
+
+  <body class="bg-board">
+    <div id="root" class="h-full w-full"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

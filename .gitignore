@@ -1,0 +1,21 @@
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Python virtual environments
+venv/
+.venv/
+syncanvas-backend/venv/
+syncanvas-backend/.venv/
+
+# Python cache
+__pycache__/
+syncanvas-backend/__pycache__/
+
+# Build output
+dist/
+build/
+
+# OS junk
+.DS_Store
+Thumbs.db

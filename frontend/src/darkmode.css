@@ -1,0 +1,82 @@
+/* frontend/src/darkmode.css
+   Minimal, high-specificity overrides for "dark mode" UI.
+   The root element gets the "dark-mode" class when darkMode=true.
+*/
+
+/* Root dark-mode flag */
+#app-root.dark-mode {
+  background: #0f1724; /* dark background behind all panels */
+  color: #e6eef8;
+}
+
+/* Top bar */
+#app-root.dark-mode .topbar {
+  background: #111827 !important;
+  color: #e6eef8 !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Toolbar area */
+#app-root.dark-mode .toolbar {
+  background: transparent !important;
+  color: #e6eef8 !important;
+}
+
+/* Buttons in toolbar override */
+#app-root.dark-mode .toolbar button {
+  background: rgba(255,255,255,0.06) !important;
+  color: #e6eef8 !important;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: none !important;
+}
+
+/* Specific bright buttons keep color but darker background */
+#app-root.dark-mode .toolbar button[aria-role="download"] { background: #0f5132 !important; }
+#app-root.dark-mode .toolbar button[aria-role="clear"] { background: #865800 !important; }
+#app-root.dark-mode .toolbar button[aria-role="leave"] { background: #7f1d1d !important; }
+
+/* Active Users panel */
+#app-root.dark-mode .active-users-panel {
+  background: #0b1220 !important;
+  color: #e6eef8 !important;
+  box-shadow: 0 6px 14px rgba(2,6,23,0.6);
+  border-radius: 6px;
+}
+
+#app-root.dark-mode .active-users-panel .user-item {
+  background: rgba(255,255,255,0.03);
+  color: #e6eef8;
+  border-radius: 6px;
+  padding: 6px 8px;
+  margin-bottom: 6px;
+}
+
+/* Drawing indicator */
+#app-root.dark-mode .drawing-indicator {
+  color: #bfe3ff !important;
+  font-style: normal;
+}
+
+/* Cursor overlay layer is transparent, nothing to change for canvas drawing.
+   But we set the canvas container background darker (canvas itself remains white).
+*/
+#app-root.dark-mode .canvas-container {
+  background: #0b1220 !important;
+}
+
+/* Ensure text inside topbar items are visible */
+#app-root.dark-mode .topbar .text-sm, 
+#app-root.dark-mode .topbar span {
+  color: #e6eef8 !important;
+}
+
+/* Minor responsive niceties */
+#app-root.dark-mode .cursor-overlay div > div {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
+}
+
+/* FIX: Do NOT darken color palette buttons */
+#app-root.dark-mode .toolbar button.color-btn {
+  background: var(--btn-color) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+}

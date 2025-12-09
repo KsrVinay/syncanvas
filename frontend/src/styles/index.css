@@ -1,0 +1,1 @@
+/* minimal styles - tailwind is loaded via CDN in index.html */ html, body, #root { height: 100%; } .cursor-overlay { z-index: 20; } canvas { display: block; }
