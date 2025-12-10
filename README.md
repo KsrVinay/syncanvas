@@ -212,7 +212,7 @@ const base = import.meta.env.VITE_BACKEND_URL.replace("http", "ws");
 
 ---
 
-## 🏆 Why This Project Is Strong 
+## 🏆 Project overview
 - Shows real-time backend experience 
 - Demonstrates WebSocket handling and event routing 
 - Clean, modular frontend + backend structure 
