@@ -1,11 +1,11 @@
 # ✨ SyncCanvas — Real-Time Collaborative Whiteboard  
 ### Built by **Sri Ram Vinay**
 
-SyncCanvas is a real-time collaborative whiteboard that lets multiple users draw together instantly in the same room.  
-It supports live drawing, cursor tracking, clearing the board, and room-based collaboration — all powered by WebSockets.
+SyncCanvas is a real-time collaborative whiteboard that allows multiple users to draw, share ideas, and collaborate inside a common room.  
+It supports live drawing, cursor tracking, clearing the board, and smooth real-time interactions using WebSockets.
 
-This project was built end-to-end using **React + Vite** for the frontend and **FastAPI + WebSockets** for the backend.  
-The backend is deployed on **Render**, and the frontend on **Vercel**.
+The frontend is built using **React + Vite**, and the backend uses **FastAPI + WebSockets**.  
+The system is fully deployed using **Vercel** (frontend) and **Render** (backend).
 
 ---
 
@@ -19,54 +19,67 @@ https://syncanvas.onrender.com
 
 ---
 
+## 📝 Important Note  
+When the first user enters a room, **there may be a small delay (5–20 sec)** before the very first stroke syncs.  
+After the connection stabilizes, syncing becomes instant.  
+This is because the WebSocket server on free hosting may take a moment to warm up.
+
+---
+
 ## 🎯 Key Features
 
 ### 🖍️ Real-Time Drawing  
-- Smooth strokes and instant updates  
-- Works across multiple users and devices  
+- Smooth stroke rendering  
+- Broadcasts drawing updates to all users in the room  
 
 ### 👥 Multi-User Rooms  
-- Join using a Room ID  
-- See who is active inside the room  
-- Each user gets a unique cursor indicator  
+- Join by creating/entering a Room ID  
+- View active users  
+- Unique cursor per user  
 
 ### 🖱️ Live Cursor Tracking  
-- Every user can see other users’ cursor movements
+- See other users’ cursor movements in real time  
 
-### 🔄 Robust WebSocket Sync  
+### 🔄 WebSocket Sync Engine  
 - Auto reconnect  
-- Queues messages when socket is not open  
-- Broadcasts strokes, cursor data, clear events, and join/leave events  
+- Message queue when socket is closed  
+- Handles events: join, leave, strokes, cursor, clear  
 
-### 🌐 Fully Deployed  
-- Frontend on **Vercel**  
-- Backend on **Render**  
-- Environment variables configured  
-- Production-ready WebSocket connection  
+### 🎨 UI & Experience  
+- Clean, responsive interface  
+- Dark mode toggle  
+- Pen color picker  
+- Undo / redo  
+- Clear board for everyone  
 
 ---
 
 ## 🧰 Tech Stack
 
-**Frontend**  
-- React (Vite)  
-- TailwindCSS  
-- Custom WebSocket hook  
-- Vercel deployment  
+### **Frontend**
+- React (Vite)
+- TailwindCSS
+- Custom WebSocket hook
+- Vercel Deployment
 
-**Backend**  
-- FastAPI  
-- WebSockets  
-- Uvicorn  
-- Python-dotenv  
-- Render deployment  
+### **Backend**
+- FastAPI
+- WebSockets
+- Uvicorn
+- Python-dotenv
+- Render Deployment
 
 ---
 
 ## 📸 Screenshots
 
-> (Your screenshots folder should be placed at:  
-> `syncanvas/screenshots/`)
+Your screenshots folder should be placed at:
+
+```
+syncanvas/screenshots/
+```
+
+Example structure:
 
 ```
 /screenshots
@@ -79,6 +92,35 @@ https://syncanvas.onrender.com
 
 ### 🎨 Drawing Board  
 ![Drawing](./screenshots/drawing.png)
+
+---
+
+## 📦 Folder Structure
+
+```
+syncanvas/
+├── frontend/
+│   ├── src/
+│   │   ├── canvas/
+│   │   ├── ws/
+│   │   ├── ui/
+│   │   └── styles/
+│   ├── index.html
+│   ├── vite.config.js
+│   ├── package.json
+│
+├── syncanvas-backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── ws/
+│   │   │   ├── manager.py
+│   │   │   ├── events.py
+│   │   │   ├── event_router.py
+│   │   │   └── state_buffer.py
+│   ├── requirements.txt
+│
+└── README.md
+```
 
 ---
 
@@ -100,8 +142,8 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Runs at:  
-http://localhost:8000
+Backend runs at:  
+http://localhost:8000  
 
 ---
 
@@ -113,8 +155,8 @@ npm install
 npm run dev
 ```
 
-Runs at:  
-http://localhost:3000
+Frontend runs at:  
+http://localhost:3000  
 
 ---
 
@@ -126,7 +168,7 @@ Vercel uses:
 VITE_BACKEND_URL = https://syncanvas.onrender.com
 ```
 
-Used inside the WebSocket client:
+WebSocket generation:
 
 ```js
 const base = import.meta.env.VITE_BACKEND_URL.replace("http", "ws");
@@ -138,22 +180,43 @@ const base = import.meta.env.VITE_BACKEND_URL.replace("http", "ws");
 
 1. Open the frontend link  
 2. Enter Room ID + Username  
-3. Join the board  
-4. Open the same room in another browser 
-5. Draw on both — strokes should sync live  
-6. Move your cursor — other users see it instantly  
-7. Use Clear button — updates for all users  
-8. Change your pen color and can be undo, redo
-9. There is an option for changing the tool bar to darkmode
+3. Join the whiteboard  
+4. Open the same room in another device or browser  
+5. Draw → strokes sync in real time  
+6. Cursor movement is live  
+7. Clear button resets board for everyone  
+8. Dark mode toggle & pen color selection  
+9. Undo / redo drawing  
 
 ---
 
-## 🏆 Why This Project Is Strong
+## 📄 Deployment Steps (Summary)
 
-- Shows real-time backend experience  
-- Demonstrates WebSocket handling and event routing  
-- Clean, modular frontend + backend structure  
-- Fully deployed full-stack project  
+### **Backend — Render**
+- Set root directory → `syncanvas-backend`
+- Build command → `pip install -r requirements.txt`
+- Start command → `uvicorn app.main:app --host 0.0.0.0 --port 8000`
+- Add environment variables (if needed)
+- Deploy
+
+### **Frontend — Vercel**
+- Root directory → `frontend`
+- Install command → `npm install`
+- Build command → `npm run build`
+- Output directory → `dist`
+- Add env var:  
+  ```
+  VITE_BACKEND_URL = https://syncanvas.onrender.com
+  ```
+- Deploy
+
+---
+
+## 🏆 Why This Project Is Strong 
+- Shows real-time backend experience 
+- Demonstrates WebSocket handling and event routing 
+- Clean, modular frontend + backend structure 
+- Fully deployed full-stack project 
 - Professional production setup (Vercel + Render)
 
 ---
@@ -177,4 +240,3 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 ### 🙌 Author  
 **Sri Ram Vinay**  
 GitHub: https://github.com/KsrVinay  
-
